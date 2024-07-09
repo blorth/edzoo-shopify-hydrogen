@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-route-module:routes/api.predictive-search.tsx?browser"],
+  "sourcesContent": ["module.exports = {};"],
+  "mappings": "+GAAA,IAAAA,EAAAC,EAAA,CAAAC,EAAAC,IAAA,CAAAA,EAAO,QAAU,CAAC",
+  "names": ["require_api_predictive_search", "__commonJSMin", "exports", "module"]
+}

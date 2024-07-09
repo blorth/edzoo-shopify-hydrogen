@@ -1,0 +1,2 @@
+import{a as o}from"https://cdn.shopify.com/oxygen-v2/31356/19637/40579/683287/build/_shared/chunk-QLLVQH5T.js";import"https://cdn.shopify.com/oxygen-v2/31356/19637/40579/683287/build/_shared/chunk-LZ6EIKHZ.js";import{b as r}from"https://cdn.shopify.com/oxygen-v2/31356/19637/40579/683287/build/_shared/chunk-YHLO7HBR.js";import{d as e}from"https://cdn.shopify.com/oxygen-v2/31356/19637/40579/683287/build/_shared/chunk-2GVARK7B.js";var t=e(r()),a=({})=>(0,t.jsx)(o,{children:"hello world"}),p=a;export{p as default};
+

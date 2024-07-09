@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../app/routes/$.tsx"],
+  "sourcesContent": ["// $.tsx\nimport {\n  Content,\n  fetchOneEntry,\n  isEditing,\n  isPreviewing,\n} from '@builder.io/sdk-react/edge';\nimport type {LoaderFunction} from '@remix-run/node';\nimport {useLoaderData} from '@remix-run/react';\n\nexport const loader: LoaderFunction = async ({params, request}) => {\n  return {};\n};\n\n// Define and render the page.\nexport default function Page() {\n  // Use the useLoaderData hook to get the Page data from `loader` above.\n  const {} = useLoaderData<typeof loader>();\n\n  // Render the page content from Builder.io\n  return <div> hello world</div>;\n}\n"],
+  "mappings": "oVAQAA,IAYS,IAAAC,EAAA,OALM,SAARC,GAAwB,CAE7B,GAAM,CAAC,EAAIC,EAA6B,EAGxC,SAAO,OAAC,OAAI,wBAAY,CAC1B",
+  "names": ["init_esm", "import_jsx_runtime", "Page", "useLoaderData"]
+}

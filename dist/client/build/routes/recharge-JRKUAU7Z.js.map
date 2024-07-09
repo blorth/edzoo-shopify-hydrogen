@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../app/routes/recharge.tsx"],
+  "sourcesContent": ["import PageContainer from '~/components/PageContainer';\nimport React from 'react';\n\ntype RechargeProps = {};\n\nconst Recharge: React.FC<RechargeProps> = ({}) => {\n  return <PageContainer>hello world</PageContainer>;\n};\n\nexport default Recharge;\n"],
+  "mappings": "gbAMS,IAAAA,EAAA,OADHC,EAAoC,CAAC,CAAC,OACnC,OAACC,EAAA,CAAc,uBAAW,EAG5BC,EAAQF",
+  "names": ["import_jsx_runtime", "Recharge", "PageContainer_default", "recharge_default"]
+}
