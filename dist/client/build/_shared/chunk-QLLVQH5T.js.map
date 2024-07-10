@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../app/components/PageContainer.tsx"],
-  "sourcesContent": ["import cx from 'classnames';\nimport React, {HTMLProps} from 'react';\n\ntype PageContainerProps = HTMLProps<HTMLDivElement> & {};\n\nconst PageContainer: React.FC<PageContainerProps> = ({\n  children,\n  className,\n  ...rest\n}) => {\n  const containerCx = cx('bg-browns-tan-light p-7 lg:p-12', className);\n  return (\n    <div className={containerCx} {...rest}>\n      {children}\n      <div className=\"p-\"></div>\n    </div>\n  );\n};\n\nexport default PageContainer;\n"],
-  "mappings": "6UAAA,IAAAA,EAAe,OAYXC,EAAA,OAPEC,EAA8C,CAAC,CACnD,SAAAC,EACA,UAAAC,EACA,GAAGC,CACL,IAAM,CACJ,IAAMC,KAAc,EAAAC,SAAG,kCAAmCH,CAAS,EACnE,SACE,QAAC,OAAI,UAAWE,EAAc,GAAGD,EAC9B,UAAAF,KACD,OAAC,OAAI,UAAU,KAAK,GACtB,CAEJ,EAEOK,EAAQN",
-  "names": ["import_classnames", "import_jsx_runtime", "PageContainer", "children", "className", "rest", "containerCx", "cx", "PageContainer_default"]
-}

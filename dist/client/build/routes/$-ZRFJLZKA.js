@@ -1,2 +1,0 @@
-import{t as e,z as i}from"https://cdn.shopify.com/oxygen-v2/31356/19637/40579/683287/build/_shared/chunk-3T2GPJBB.js";import{b as r}from"https://cdn.shopify.com/oxygen-v2/31356/19637/40579/683287/build/_shared/chunk-YHLO7HBR.js";import{d as o}from"https://cdn.shopify.com/oxygen-v2/31356/19637/40579/683287/build/_shared/chunk-2GVARK7B.js";i();var n=o(r());function t(){let{}=e();return(0,n.jsx)("div",{children:" hello world"})}export{t as default};
-

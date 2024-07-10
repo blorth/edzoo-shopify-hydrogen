@@ -1,2 +1,0 @@
-import{a as s}from"https://cdn.shopify.com/oxygen-v2/31356/19637/40579/683287/build/_shared/chunk-LZ6EIKHZ.js";import{b as t}from"https://cdn.shopify.com/oxygen-v2/31356/19637/40579/683287/build/_shared/chunk-YHLO7HBR.js";import{d as e}from"https://cdn.shopify.com/oxygen-v2/31356/19637/40579/683287/build/_shared/chunk-2GVARK7B.js";var a=e(s()),o=e(t()),c=({children:r,className:n,...i})=>{let p=(0,a.default)("bg-browns-tan-light p-7 lg:p-12",n);return(0,o.jsxs)("div",{className:p,...i,children:[r,(0,o.jsx)("div",{className:"p-"})]})},P=c;export{P as a};
-

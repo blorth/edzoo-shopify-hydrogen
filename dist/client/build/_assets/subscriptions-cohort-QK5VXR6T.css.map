@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../app/styles/subscriptions-cohort.css"],
-  "sourcesContent": [".SubscriptionsCohort .cohort-grid {\n  display: grid;\n  grid-template-areas:\n    'billing-header'\n    'image-carousel'\n    'billing-terms';\n  grid-template-columns: 1fr;\n}\n\n.SubscriptionsCohort .heading-group {\n  grid-area: billing-header;\n}\n\n.SubscriptionsCohort .billing-terms {\n  grid-area: billing-terms;\n}\n\n.SubscriptionsCohort .image-carousel {\n  grid-area: image-carousel;\n}\n\n@media (min-width: 768px) {\n  .SubscriptionsCohort .cohort-grid {\n    grid-template-areas:\n      'image-carousel billing-header'\n      'image-carousel billing-terms';\n    grid-template-columns: 1fr 1fr;\n  }\n}"],
-  "mappings": "AAAA,kCACE,aACA,sEAIA,0BAGF,oCACE,yBAGF,oCACE,wBAGF,qCACE,yBAGF,0BACE,kCACE,mFAGA",
-  "names": []
-}

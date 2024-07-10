@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["browser-route-module:routes/[sitemap.xml].tsx?browser"],
-  "sourcesContent": ["module.exports = {};"],
-  "mappings": "+GAAA,IAAAA,EAAAC,EAAA,CAAAC,EAAAC,IAAA,CAAAA,EAAO,QAAU,CAAC",
-  "names": ["require_sitemap_xml", "__commonJSMin", "exports", "module"]
-}
