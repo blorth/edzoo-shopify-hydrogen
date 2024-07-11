@@ -35,7 +35,7 @@ export default function Subscriptions() {
           </p>
         </div>
         <div className="product-list gap-7 flex flex-col md:flex-row justify-center">
-          {products.edges.map((product) => {
+          {products?.edges?.map((product) => {
             const {node} = product;
             const title = node.title
               .replace('edZOOcation™', '')

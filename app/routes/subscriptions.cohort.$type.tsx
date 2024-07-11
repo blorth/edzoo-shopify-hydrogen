@@ -24,6 +24,7 @@ import {RadioGroup} from '@nextui-org/react';
 import {SUBSCRIPTION_COLLECTIONS} from '~/constants';
 import {COLLECTION_FRAGMENT} from '~/lib/fragmentsSubscriptions';
 import {CartForm, CartQueryDataReturn} from '@shopify/hydrogen';
+import ServiceHighlights from '~/components/ServiceHighlights';
 
 type SubscriptionsCohertProps = {};
 
@@ -124,7 +125,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = (props) => {
           value={selected}
           onValueChange={handleOnSelect}
         >
-          {products.edges.map((product) => {
+          {products.edges.map((product: any) => {
             const {node} = product;
             const term = getBillingTerm(node.title);
             const price = node.variants.edges[0].node.price.amount;
@@ -145,6 +146,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = (props) => {
           })}
         </RadioGroup>
       </div>
+      <ServiceHighlights />
     </div>
   );
 };

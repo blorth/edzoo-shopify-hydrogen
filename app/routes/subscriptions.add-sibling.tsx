@@ -39,6 +39,7 @@ export async function loader({params, context, request}: LoaderFunctionArgs) {
 
 const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
   const {collections, cart} = useLoaderData<typeof loader>();
+  console.log('cart::: ', cart);
   const [searchParams, setSearchParams] = useSearchParams();
   const params = useParams();
   const [siblingSelections, setSiblingSelections] = useState<any>([]);
@@ -60,7 +61,6 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
           return product.node.id.includes(searchParams.get('id'));
         },
       );
-
       setSelectedProduct(matchingProduct.node);
 
       // Find the matching purchase type in the other collections
@@ -82,6 +82,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
         if (matched) products.push(matched);
       }
 
+      console.log('products::: ', products);
       setSiblingSelections(products);
 
       // TODO: Need to find the matching accessories in the collections object.
@@ -94,6 +95,8 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
     product: any,
     quantityAction?: QuantityActionsEnum,
   ) => {
+    console.log('quantityAction::: ', quantityAction);
+    console.log('product::: ', product);
     // Find the product in the cart and increment or decrement the size based on quantityAction
     // If the new quantity goes down to zero,
 
@@ -106,37 +109,39 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
 
   return (
     <div className="SubscriptionsCohortWithSelectedId bg-browns-tan-light p-9">
-      <div className="heading-group">
-        <h2 className="mb-2">Want to Add a Sibling?</h2>
-        <p>Add another subscription box or one-time accessories.</p>
-      </div>
-      <div className="mt-4">
-        <h4>Subscriptions</h4>
-        <div className="flex gap-2 flex-wrap">
-          {selectedProduct && (
-            <ProductCard
-              product={selectedProduct}
-              key={selectedProduct.id}
-              isSelected={selectedProduct.id.includes(searchParams.get('id'))}
-              cardMode={CardModeEnum.QUANTITY}
-              // quantity={productInCart.quantity}
-              onSelect={handleOnSelect}
-            />
-          )}
-
-          {siblingSelections.map((product: any) => {
-            const {node} = product;
-            return (
+      <div className="cohort-grid max-w-6xl mx-auto">
+        <div className="heading-group">
+          <h2 className="mb-2">Want to Add a Sibling?</h2>
+          <p>Add another subscription box or one-time accessories.</p>
+        </div>
+        <div className="mt-8">
+          <h4>Subscriptions</h4>
+          <div className="flex gap-2 flex-wrap">
+            {selectedProduct && (
               <ProductCard
-                product={node}
-                key={node.id}
-                isSelected={node.id === searchParams.get('id')}
+                product={selectedProduct}
+                key={selectedProduct.id}
+                isSelected={selectedProduct.id.includes(searchParams.get('id'))}
                 cardMode={CardModeEnum.QUANTITY}
-                // quantity={productInCart.quantity}
+                quantity={1}
                 onSelect={handleOnSelect}
               />
-            );
-          })}
+            )}
+
+            {siblingSelections.map((product: any) => {
+              const {node} = product;
+              return (
+                <ProductCard
+                  product={node}
+                  key={node.id}
+                  isSelected={node.id === searchParams.get('id')}
+                  cardMode={CardModeEnum.QUANTITY}
+                  // quantity={productInCart?.quantity}
+                  onSelect={handleOnSelect}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
