@@ -15,6 +15,7 @@ import ProductCard, {
   CardModeEnum,
   QuantityActionsEnum,
 } from '~/components/ProductCard';
+import {Button} from '@nextui-org/button';
 
 type SubscriptionsCohertProps = {};
 
@@ -39,7 +40,6 @@ export async function loader({params, context, request}: LoaderFunctionArgs) {
 
 const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
   const {collections, cart} = useLoaderData<typeof loader>();
-  console.log('cart::: ', cart);
   const [searchParams, setSearchParams] = useSearchParams();
   const params = useParams();
   const [siblingSelections, setSiblingSelections] = useState<any>([]);
@@ -110,12 +110,31 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
   return (
     <div className="SubscriptionsCohortWithSelectedId bg-browns-tan-light p-9">
       <div className="cohort-grid max-w-6xl mx-auto">
-        <div className="heading-group">
-          <h2 className="mb-2">Want to Add a Sibling?</h2>
-          <p>Add another subscription box or one-time accessories.</p>
+        <div className="heading-group flex items-center justify-between">
+          <div>
+            <h2 className="mb-2">Want to Add a Sibling?</h2>
+            <p>Add another subscription box or one-time accessories.</p>
+          </div>
+          <div className="flex items-center gap-x-1">
+            <Button
+              className="text-black uppercase font-semibold"
+              color="primary"
+              variant="light"
+              size="sm"
+            >
+              Skip
+            </Button>
+            <Button
+              size="sm"
+              color="primary"
+              className="font-volkhov rounded-sm font-semibold tracking-wide uppercase"
+            >
+              Confirm and Checkout
+            </Button>
+          </div>
         </div>
         <div className="mt-8">
-          <h4>Subscriptions</h4>
+          <h4 className="mb-4">Subscriptions</h4>
           <div className="flex gap-2 flex-wrap">
             {selectedProduct && (
               <ProductCard
@@ -142,6 +161,23 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
               );
             })}
           </div>
+        </div>
+        <div className="flex items-center justify-end mt-3 gap-x-1">
+          <Button
+            className="text-black uppercase font-semibold"
+            color="primary"
+            variant="light"
+            size="sm"
+          >
+            Skip
+          </Button>
+          <Button
+            size="sm"
+            color="primary"
+            className="font-volkhov rounded-sm font-semibold tracking-wide uppercase"
+          >
+            Confirm and Checkout
+          </Button>
         </div>
       </div>
     </div>

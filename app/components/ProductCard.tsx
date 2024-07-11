@@ -129,7 +129,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   <Button
                     color="primary"
                     className="font-volkhov rounded-sm font-semibold tracking-wide uppercase px-[30px]"
-                    onClick={() => handleOnSelect(1)}
+                    onClick={() => handleOnSelect()}
                   >
                     + Add
                   </Button>
