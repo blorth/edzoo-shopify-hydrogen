@@ -10,7 +10,7 @@ import {
   useParams,
   useSubmit,
 } from '@remix-run/react';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import BillingTermCard from '~/components/BillingTermCard';
 import {
   getBillingTerm,
@@ -57,7 +57,7 @@ export async function action({request, context}: ActionFunctionArgs) {
 }
 
 export async function loader({params, context, request}: LoaderFunctionArgs) {
-  const {type} = params;
+  const {type} = params as any;
 
   if (!type) return json({});
 
@@ -81,6 +81,18 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = (props) => {
   const submit = useSubmit();
 
   const {products} = collection;
+  const [allProduct, setAllProduct] = useState<any[]>([]);
+  console.log('allProduct::: ', allProduct);
+  useEffect(() => {
+    let products = collection.products?.edges;
+    if (products?.length >= 2) {
+      products[1].node.banner = 'most popular';
+    }
+    if (products?.length >= 4) {
+      products[3].node.banner = 'best value';
+    }
+    setAllProduct(products);
+  }, [collection]);
 
   const monthlyBox = getMonthlyBoxFromCollection(products);
   const [selected, setSelected] = React.useState('');
@@ -108,7 +120,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = (props) => {
       <div className="cohort-grid max-w-6xl mx-auto">
         <div className="heading-group">
           <h2 className="mb-2">Select Billing Term</h2>
-          <p>
+          <p className="mob:mb-5">
             Receive a different species each month. Pay monthly or save up to
             35% with a prepaid plan.
           </p>
@@ -116,35 +128,37 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = (props) => {
         <div className="image-carousel self-center justify-self-center">
           <ImageCarousel images={monthlyBox.node.images.nodes} />
         </div>
+        <div className="mob:mt-5">
+          <RadioGroup
+            className="billing-terms mt-7 "
+            classNames={{
+              wrapper: 'space-y-2',
+            }}
+            value={selected}
+            onValueChange={handleOnSelect}
+          >
+            {allProduct?.map((product: any) => {
+              const {node} = product;
+              const term = getBillingTerm(node.title);
+              const price = node.variants.edges[0].node.price.amount;
+              const monthlyBoxPrice =
+                monthlyBox.node.variants.edges[0].node.compareAtPrice.amount;
 
-        <RadioGroup
-          className="billing-terms mt-7"
-          classNames={{
-            wrapper: 'space-y-2',
-          }}
-          value={selected}
-          onValueChange={handleOnSelect}
-        >
-          {products.edges.map((product: any) => {
-            const {node} = product;
-            const term = getBillingTerm(node.title);
-            const price = node.variants.edges[0].node.price.amount;
-            const monthlyBoxPrice =
-              monthlyBox.node.variants.edges[0].node.compareAtPrice.amount;
-
-            return (
-              <div key={node.id} className="billing-term">
-                <BillingTermCard
-                  billingTerm={term}
-                  price={price}
-                  payDescription={getBillingTermPayPrice(price, term)}
-                  compareAtPrice={monthlyBoxPrice}
-                  productId={node.id}
-                />
-              </div>
-            );
-          })}
-        </RadioGroup>
+              return (
+                <div key={node.id} className="billing-term">
+                  <BillingTermCard
+                    billingTerm={term}
+                    price={price}
+                    payDescription={getBillingTermPayPrice(price, term)}
+                    compareAtPrice={monthlyBoxPrice}
+                    productId={node.id}
+                    banner={product?.node?.banner}
+                  />
+                </div>
+              );
+            })}
+          </RadioGroup>
+        </div>
       </div>
       <ServiceHighlights />
     </div>

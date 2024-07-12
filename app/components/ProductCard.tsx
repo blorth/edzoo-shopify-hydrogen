@@ -90,7 +90,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           Current Selection
         </div>
       )}
-      <div className="flex flex-row md:flex-col pr-5 md:px-5 pb-5 pt-11 items-center justify-center gap-1">
+      <div className="flex flex-row md:flex-col pr-5 md:px-5 pb-5 pt-11 mob:pt-5 items-center justify-center gap-1">
         <div className="relative min-w-[160px] max-w-[160px]">
           <Image
             data={product.featuredImage}
@@ -102,7 +102,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         <div className="metadata flex flex-col md:justify-center md:items-center lg:mt-5 gap-1">
-          <div className="font-volkhov text-browns-brown font-bold md:text-center">
+          <div className="font-volkhov text-browns-brown font-bold md:text-center mob:text-sm">
             {product.title}
           </div>
           <div className="price flex flex-row gap-2 font-volkhov">

@@ -211,7 +211,9 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
   return (
     <header>
       <AnnouncementBar>
-        50% of proceeds are donated to wildlife conservation
+        <div className="mob:px-3 mob:text-sm">
+          50% of proceeds are donated to wildlife conservation
+        </div>
       </AnnouncementBar>
       <div className="flex bg-white items-center sticky h-[100px] px-4 lg:px-10 2xl:px-20 justify-between mx-auto max-w-[1536px]">
         <HeaderMenuMobileToggle />

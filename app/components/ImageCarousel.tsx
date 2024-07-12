@@ -1,9 +1,49 @@
 import Slider from '@ant-design/react-slick';
 import {Image} from '@shopify/hydrogen';
 import React from 'react';
+import LeftSliderIcon from './icons/LeftSliderIcon';
+import RightSliderIcon from './icons/RightSliderIcon';
 
 type ImageCarouselProps = {
   images: any[];
+};
+
+const CustomNextArrow = (props: any) => {
+  const {className, style, onClick} = props;
+  return (
+    <div
+      className={`${className}`}
+      style={{
+        ...style,
+        display: 'block',
+        right: '-35px',
+        transform: 'scale(1.7)',
+        color: 'black',
+      }}
+      onClick={onClick}
+    >
+      <RightSliderIcon />
+    </div>
+  );
+};
+
+const CustomPrevArrow = (props: any) => {
+  const {className, style, onClick} = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: 'block',
+        left: '-50px',
+        transform: 'scale(1.7)',
+        color: 'black',
+      }}
+      onClick={onClick}
+    >
+      <LeftSliderIcon />
+    </div>
+  );
 };
 
 const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
@@ -13,6 +53,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
   };
 
   if (!images) return null;
@@ -28,21 +70,12 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
           );
         })}
       </Slider>
+
       <style jsx>
         {`
-          .slick-arrow {
-            transform: scale(1.7);
-            color: black;
-          }
           .slick-next:before,
           .slick-prev:before {
-            color: grey;
-          }
-          .slick-next {
-            right: -40px;
-          }
-          .slick-prev {
-            left: -40px;
+            display: none;
           }
         `}
       </style>
