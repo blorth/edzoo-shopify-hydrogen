@@ -26,7 +26,7 @@ export default function Subscriptions() {
     <PageContainer>
       <div className="flex flex-col gap-7">
         <div className="md:text-center">
-          <h1 className="mb-2 font-volkhov volkhov-regular">
+          <h1 className="mb-2 font-volkhov volkhov-regular mob:text-[25px]">
             Select Child's Age
           </h1>
           <p>

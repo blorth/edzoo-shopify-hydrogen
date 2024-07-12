@@ -1,5 +1,5 @@
 import {Button} from '@nextui-org/button';
-import {Image, Money} from '@shopify/hydrogen';
+import {CartForm, Image, Money} from '@shopify/hydrogen';
 import cx from 'classnames';
 import React from 'react';
 
@@ -126,6 +126,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <div className="mt-4">
               {
                 inStock && !quantity && (
+                  // <CartForm
+                  //   action="CustomEditInPlace"
+                  //   inputs={{
+                  //     lines: [
+                  //       {
+                  //         merchandiseId: product.id,
+                  //         quantity: 1,
+                  //       },
+                  //     ],
+                  //   }}
+                  // >
                   <Button
                     color="primary"
                     className="font-volkhov rounded-sm font-semibold tracking-wide uppercase px-[30px]"
@@ -133,6 +144,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   >
                     + Add
                   </Button>
+                  // </CartForm>
                 )
                 //  : (
                 //   <Button
@@ -159,7 +171,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
 
           {cardMode === CardModeEnum.QUANTITY && quantity && quantity >= 1 && (
-            <div className="flex items-center justify-center border text-large">
+            <div className="flex items-center justify-center border w-fit text-large">
               <Button
                 color="primary"
                 className="font-volkhov rounded-sm min-w-8"

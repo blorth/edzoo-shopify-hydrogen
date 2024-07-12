@@ -54,6 +54,11 @@ export default {
       gridTemplateColumns: {
         footer: '1fr 1fr minmax(100, 150px) 1fr',
       },
+      screens: {
+        mob: {max: '767px'},
+        tab: {min: '768px', max: '1023px'},
+        mobtab: {max: '1023px'},
+      },
     },
     letterSpacing: {
       wide: '0.06em',

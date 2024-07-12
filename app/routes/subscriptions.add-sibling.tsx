@@ -115,22 +115,24 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
             <h2 className="mb-2">Want to Add a Sibling?</h2>
             <p>Add another subscription box or one-time accessories.</p>
           </div>
-          <div className="flex items-center gap-x-1">
-            <Button
-              className="text-black uppercase font-semibold"
-              color="primary"
-              variant="light"
-              size="sm"
-            >
-              Skip
-            </Button>
-            <Button
-              size="sm"
-              color="primary"
-              className="font-volkhov rounded-sm font-semibold tracking-wide uppercase"
-            >
-              Confirm and Checkout
-            </Button>
+          <div className="mob:hidden">
+            <div className="flex items-center gap-x-1 ">
+              <Button
+                className="text-black uppercase font-semibold"
+                color="primary"
+                variant="light"
+                size="sm"
+              >
+                Skip
+              </Button>
+              <Button
+                size="sm"
+                color="primary"
+                className="font-volkhov rounded-sm font-semibold tracking-wide uppercase"
+              >
+                Confirm and Checkout
+              </Button>
+            </div>
           </div>
         </div>
         <div className="mt-8">
@@ -162,7 +164,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
             })}
           </div>
         </div>
-        <div className="flex items-center justify-end mt-3 gap-x-1">
+        <div className="flex items-center justify-end mt-3 gap-x-1 mob:bg-white mob:fixed mob:bottom-0 mob:w-full mob:left-0 mob:py-6 mob:pr-5 mob:z-50 ">
           <Button
             className="text-black uppercase font-semibold"
             color="primary"
