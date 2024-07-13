@@ -48,20 +48,20 @@ const BillingTermCard: React.FC<BillingTermCardProps> = ({
       (compareAtPrice - monthlyPrice) * TERM_LENGTH[billingTerm];
 
     return (
-      <div className="flex gap-1">
+      <div className="flex items-end justify-end gap-1">
         Save{' '}
         <Money data={{amount: savedPrice.toString(), currencyCode: 'USD'}} />
       </div>
     );
   };
   return (
-    <div className="BillingTermCard border-1 border-neutrals-gray-light py-4 pl-4 pr-5 max-w-[392px] relative bg-white">
+    <div className="BillingTermCard border-1 border-neutrals-gray-light py-4 pl-4 pr-5 w-full relative bg-white">
       {banner && (
         <div className="banner uppercase text-white absolute text-[11px] py-1 px-3 bg-[#D4784C] right-[20px] top-[-12px]">
           {banner}
         </div>
       )}
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-baseline">
         <Radio value={productId} />
         <div className="middle-content">
           <div className="font-volkhov text-[20px] text-browns-brown">
@@ -81,7 +81,7 @@ const BillingTermCard: React.FC<BillingTermCardProps> = ({
               {compareAtPrice}
             </span>
           </div>
-          <div className="text-sm mt-2">
+          <div className="text-sm mt-2 text-right">
             <div>{renderSaveDescription()}</div>
             <div>Free Shipping!</div>
           </div>

@@ -117,15 +117,15 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = (props) => {
 
   return (
     <div className="SubscriptionsCohort bg-browns-tan-light p-9">
-      <div className="cohort-grid max-w-6xl mx-auto">
+      <div className="cohort-grid max-w-screen-lg mx-auto">
         <div className="heading-group">
-          <h2 className="mb-2">Select Billing Term</h2>
+          <h2 className="mb-2 text-[32px]">Select Billing Term</h2>
           <p className="mob:mb-5">
             Receive a different species each month. Pay monthly or save up to
             35% with a prepaid plan.
           </p>
         </div>
-        <div className="image-carousel self-center justify-self-center">
+        <div className="image-carousel self-center mt-[-80px] mob:mt-0 mob:mr-0 mr-20 justify-self-center">
           <ImageCarousel images={monthlyBox.node.images.nodes} />
         </div>
         <div className="mob:mt-5">

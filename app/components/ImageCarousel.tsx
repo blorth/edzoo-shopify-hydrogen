@@ -60,7 +60,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
   if (!images) return null;
 
   return (
-    <div className="ImageCarousel mob:w-[280px] tab:w-[250px] max-w-[450px]">
+    <div className="ImageCarousel mob:w-[280px] tab:w-[250px] max-w-[500px]">
       <Slider {...settings}>
         {images.map((image, index) => {
           return (

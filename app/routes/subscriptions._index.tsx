@@ -34,7 +34,7 @@ export default function Subscriptions() {
             add siblings later on.
           </p>
         </div>
-        <div className="product-list gap-7 flex flex-col md:flex-row justify-center">
+        <div className="product-list gap-4 flex flex-col md:flex-row justify-center">
           {products?.edges?.map((product) => {
             const {node} = product;
             const title = node.title

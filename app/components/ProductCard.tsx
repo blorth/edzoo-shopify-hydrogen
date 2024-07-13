@@ -65,7 +65,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const inStock = true;
 
-  const productCx = cx('ProductCard md:w-[250px] w-full rounded-md bg-white', {
+  const productCx = cx('ProductCard md:w-[270px] w-full rounded-md bg-white', {
     'border-2 border-greens-green-primary': isSelected,
   });
 
