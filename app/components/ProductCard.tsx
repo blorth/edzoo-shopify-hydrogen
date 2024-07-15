@@ -198,7 +198,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   />
                 </svg>
               </Button>
-              <div className="min-w-8 text-center">{quantity}</div>
+              <div className="min-w-10 text-center">{quantity}</div>
               <Button
                 color="primary"
                 className="font-volkhov rounded-sm min-w-8"

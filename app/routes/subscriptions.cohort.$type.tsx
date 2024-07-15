@@ -20,7 +20,7 @@ import {
   getMonthlyBoxFromCollection,
 } from '~/utils/textUtils';
 import ImageCarousel from '~/components/ImageCarousel';
-import {RadioGroup} from '@nextui-org/react';
+import {Checkbox, RadioGroup} from '@nextui-org/react';
 import {SUBSCRIPTION_COLLECTIONS} from '~/constants';
 import {COLLECTION_FRAGMENT} from '~/lib/fragmentsSubscriptions';
 import {CartForm, CartQueryDataReturn} from '@shopify/hydrogen';
@@ -145,7 +145,10 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = (props) => {
                 monthlyBox.node.variants.edges[0].node.compareAtPrice.amount;
 
               return (
-                <div key={node.id} className="billing-term">
+                <div
+                  key={node.id}
+                  className="billing-term hover:border-greens-green-primary active:border-2 border-1 border-transparent"
+                >
                   <BillingTermCard
                     billingTerm={term}
                     price={price}

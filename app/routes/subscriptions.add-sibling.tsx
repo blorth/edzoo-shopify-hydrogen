@@ -109,7 +109,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
 
   return (
     <div className="SubscriptionsCohortWithSelectedId bg-browns-tan-light p-9">
-      <div className="cohort-grid max-w-[1536px] px-4 mx-auto">
+      <div className="cohort-grid max-w-6xl px-4 mx-auto">
         <div className="heading-group flex items-center justify-between">
           <div>
             <h2 className="mb-2">Want to Add a Sibling?</h2>
