@@ -7,6 +7,7 @@ import type {
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
 import ProductCard from '~/components/ProductCard';
+import {Spinner} from '@nextui-org/react';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -25,9 +26,9 @@ export default function Homepage() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="home">
-      <FeaturedCollection collection={data.featuredCollection} />
+    <div className="recommended-products max-w-7xl mx-auto mob:px-4">
       <RecommendedProducts products={data.recommendedProducts} />
+      <FeaturedCollection collection={data.featuredCollection} />
     </div>
   );
 }
@@ -60,10 +61,16 @@ function RecommendedProducts({
   products: Promise<RecommendedProductsQuery>;
 }) {
   return (
-    <div className="recommended-products">
-      <h2>Recommended Products</h2>
+    <>
+      <h2 className="mob:text-center">Recommended Products</h2>
       <div className="flex flex-col">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center h-96">
+              <Spinner />
+            </div>
+          }
+        >
           <Await resolve={products}>
             {({products}) => (
               <div className="recommended-products-grid flex flex-col gap-10 lg:flex-row">
@@ -82,7 +89,7 @@ function RecommendedProducts({
         </Suspense>
       </div>
       <br />
-    </div>
+    </>
   );
 }
 
