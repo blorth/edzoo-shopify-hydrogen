@@ -21,6 +21,7 @@ type ProductCardProps = {
     id: string;
     productType: string;
     title: string;
+    variants?: any;
     images: {
       nodes: {
         id: string;
@@ -80,13 +81,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
   );
 
   const handleOnSelect = (quantityAction?: QuantityActionsEnum) => {
+    console.log('product, quantityAction::: ', product, quantityAction);
     onSelect(product, quantityAction);
   };
 
   return (
     <div className={productCx}>
       {isSelected && (
-        <div className="current-selection bg-greens-green-primary text-white text-center font-bold font-volkhov p-2">
+        <div className="font-optima current-selection bg-greens-green-primary text-white text-center font-bold p-2">
           Current Selection
         </div>
       )}
@@ -129,40 +131,44 @@ const ProductCard: React.FC<ProductCardProps> = ({
               Bills and ships monthly
             </div>
           )}
-
           {CardModeEnum.SINGLE_ADD && (
             <div className="mt-4">
-              {
-                inStock && !quantity && (
-                  // <CartForm
-                  //   action="CustomEditInPlace"
-                  //   inputs={{
-                  //     lines: [
-                  //       {
-                  //         merchandiseId: product.id,
-                  //         quantity: 1,
-                  //       },
-                  //     ],
-                  //   }}
-                  // >
-                  <Button
-                    color="primary"
-                    className="font-volkhov rounded-sm font-semibold tracking-wide uppercase px-[30px]"
-                    onClick={() => handleOnSelect()}
-                  >
-                    + Add
-                  </Button>
-                  // </CartForm>
-                )
-                //  : (
-                //   <Button
-                //     color="secondary"
-                //     className="font-volkhov rounded-sm font-semibold tracking-wide uppercase px-[30px]"
-                //   >
-                //     Join The Waitlist
-                //   </Button>
-                // )
-              }
+              {inStock && !quantity && (
+                <>
+                  {product.variants ? (
+                    <CartForm
+                      action={CartForm.ACTIONS.LinesAdd}
+                      route="/cart"
+                      inputs={{
+                        lines: [
+                          {
+                            merchandiseId: product.variants.edges[0].node.id,
+                            quantity: 1,
+                          },
+                        ],
+                      }}
+                    >
+                      <Button
+                        type="submit"
+                        color="primary"
+                        className="font-volkhov rounded-sm font-semibold tracking-wide uppercase px-[30px]"
+                        onClick={() => handleOnSelect()}
+                      >
+                        + Add
+                      </Button>
+                    </CartForm>
+                  ) : (
+                    <Button
+                      type="submit"
+                      color="primary"
+                      className="font-volkhov rounded-sm font-semibold tracking-wide uppercase px-[30px]"
+                      onClick={() => handleOnSelect()}
+                    >
+                      + Add
+                    </Button>
+                  )}
+                </>
+              )}
             </div>
           )}
 

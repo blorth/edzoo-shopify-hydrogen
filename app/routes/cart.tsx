@@ -24,9 +24,6 @@ export async function action({request, context}: ActionFunctionArgs) {
   let status = 200;
   let result: CartQueryDataReturn;
 
-
-  console.log('ADDDING TO CART', action, JSON.stringify(inputs, null, 4));
-
   switch (action) {
     case CartForm.ACTIONS.LinesAdd:
       result = await cart.addLines(inputs.lines);
@@ -35,7 +32,7 @@ export async function action({request, context}: ActionFunctionArgs) {
       result = await cart.updateLines(inputs.lines);
       break;
     case CartForm.ACTIONS.LinesRemove:
-      result = await cart.removeLines(inputs.lineIds);
+      result = await cart.removeLines(inputs.lineIds);                                      
       break;
     case CartForm.ACTIONS.DiscountCodesUpdate: {
       const formDiscountCode = inputs.discountCode;

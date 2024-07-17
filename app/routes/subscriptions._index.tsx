@@ -29,7 +29,7 @@ export default function Subscriptions() {
           <h1 className="mb-2 font-volkhov volkhov-regular mob:text-[25px]">
             Select Child's Age
           </h1>
-          <p>
+          <p className="font-optima">
             Select the age that best fits your child. You'll have the option to
             add siblings later on.
           </p>
@@ -43,7 +43,7 @@ export default function Subscriptions() {
               .replace('Box', '')
               .trim();
 
-            const modifiedProduct = {
+            const modifiedProduct: any = {
               ...node,
               title,
             };

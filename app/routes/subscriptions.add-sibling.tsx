@@ -1,8 +1,11 @@
 import {
+  ActionFunctionArgs,
   defer,
+  json,
   SerializeFrom,
   type LoaderFunctionArgs,
 } from '@shopify/remix-oxygen';
+import {CartForm} from '@shopify/hydrogen';
 import React, {useEffect, useState} from 'react';
 import {
   useLoaderData,
@@ -38,21 +41,70 @@ export async function loader({params, context, request}: LoaderFunctionArgs) {
   });
 }
 
+export async function action({request, context}: ActionFunctionArgs) {
+  try {
+  } catch (error) {}
+  const {session, cart} = context;
+
+  const [formData, customerAccessToken] = await Promise.all([
+    request.formData(),
+    session.get('customerAccessToken'),
+  ]);
+
+  const {action, inputs} = CartForm.getFormInput(formData);
+  let result: any;
+
+  switch (action) {
+    case CartForm.ACTIONS.LinesAdd:
+      result = await cart.addLines(inputs.lines);
+      break;
+    case CartForm.ACTIONS.LinesUpdate:
+      result = await cart.updateLines(inputs.lines);
+      break;
+    case CartForm.ACTIONS.LinesRemove:
+      result = await cart.removeLines(inputs.lineIds);
+      break;
+    case CartForm.ACTIONS.DiscountCodesUpdate: {
+      const formDiscountCode = inputs.discountCode;
+
+      // User inputted discount code
+      const discountCodes = (
+        formDiscountCode ? [formDiscountCode] : []
+      ) as string[];
+
+      // Combine discount codes already applied on cart
+      discountCodes.push(...inputs.discountCodes);
+
+      result = await cart.updateDiscountCodes(discountCodes);
+      break;
+    }
+    case CartForm.ACTIONS.BuyerIdentityUpdate:
+      result = await cart.updateBuyerIdentity({
+        ...inputs.buyerIdentity,
+        customerAccessToken,
+      });
+      break;
+    default:
+      console.log('cart action is not defined');
+  }
+
+  if (result) {
+    const headers = new Headers();
+    cart.setCartId(result.cart.id);
+    headers.append('Set-Cookie', await context.session.commit());
+    return json(result, {status: 200, headers});
+  } else {
+    alert('ok');
+  }
+}
+
 const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
   const {collections, cart} = useLoaderData<typeof loader>();
   const [searchParams, setSearchParams] = useSearchParams();
-  const params = useParams();
   const [siblingSelections, setSiblingSelections] = useState<any>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>();
-  const [selectedAccessories, setSelectedAccessories] = useState<any>([]);
-
-  console.log({collections});
 
   useEffect(() => {
-    /**
-     * On load, get the three collections
-     * Get the matching age group that matches the passed in ID and cohort.
-     */
     const selectedCohort = searchParams.get('cohort');
     if (selectedCohort && typeof selectedCohort === 'string' && collections) {
       const selectedCollection = collections[selectedCohort];
@@ -62,11 +114,8 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
         },
       );
       setSelectedProduct(matchingProduct.node);
-
-      // Find the matching purchase type in the other collections
-      // Don't return the matching product that's on the same cohort
       const products = [];
-      for (const [key, value] of Object.entries(collections)) {
+      for (const [key, value] of Object.entries(collections as any)) {
         const matched = value.products.edges.find((product: any) => {
           console.log({product});
           const cohort = product.node.metaFieldCohort.value;
@@ -81,13 +130,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
 
         if (matched) products.push(matched);
       }
-
-      console.log('products::: ', products);
       setSiblingSelections(products);
-
-      // TODO: Need to find the matching accessories in the collections object.
-      // We need to find the matching accessories that are in the same metaFieldPurchaseTypeTag as the selected product
-      // ie if the selected product is a monthly subscription, find the monthly accessories collection.
     }
   }, [collections]);
 
@@ -95,16 +138,8 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
     product: any,
     quantityAction?: QuantityActionsEnum,
   ) => {
-    console.log('quantityAction::: ', quantityAction);
     console.log('product::: ', product);
-    // Find the product in the cart and increment or decrement the size based on quantityAction
-    // If the new quantity goes down to zero,
-
-    if (quantityAction === QuantityActionsEnum.ADD) {
-      // TODO: If ADD, add item to cart
-    } else if (quantityAction === QuantityActionsEnum.MINUS) {
-      // If MINUS, decrease quantity
-    }
+    console.log('quantityAction::: ', quantityAction);
   };
 
   return (
@@ -116,7 +151,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
             <p>Add another subscription box or one-time accessories.</p>
           </div>
           <div className="mob:hidden">
-            <div className="flex items-center gap-x-1 ">
+            <div className="flex items-center gap-x-1 font-volkhov">
               <Button
                 className="text-black uppercase font-semibold"
                 color="primary"
@@ -164,7 +199,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
             })}
           </div>
         </div>
-        <div className="flex items-center justify-end mt-3 gap-x-1 mob:bg-white mob:fixed mob:bottom-0 mob:w-full mob:left-0 mob:py-6 mob:pr-5 mob:z-50 ">
+        <div className="flex font-volkhov items-center justify-end mt-3 gap-x-1 mob:bg-white mob:fixed mob:bottom-0 mob:w-full mob:left-0 mob:py-6 mob:pr-5 mob:z-50 ">
           <Button
             className="text-black uppercase font-semibold"
             color="primary"

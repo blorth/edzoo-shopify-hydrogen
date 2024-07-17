@@ -35,7 +35,9 @@ export async function action({request, context}: ActionFunctionArgs) {
   const productId = formData.get('id');
 
   let result: CartQueryDataReturn;
-  result = await cart.addLines([{merchandiseId: productId, quantity: 1}]);
+  result = await cart.addLines([
+    {merchandiseId: productId, quantity: 1},
+  ] as any);
 
   /**
    * This is erroring out with the following error when adding a new item on the cart
@@ -75,14 +77,13 @@ export async function loader({params, context, request}: LoaderFunctionArgs) {
 }
 
 const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = (props) => {
-  const {collection} = useLoaderData<typeof loader>();
+  const {collection} = useLoaderData<typeof loader>() as any;
   const navigate = useNavigate();
   const params = useParams();
   const submit = useSubmit();
 
   const {products} = collection;
   const [allProduct, setAllProduct] = useState<any[]>([]);
-  console.log('allProduct::: ', allProduct);
   useEffect(() => {
     let products = collection.products?.edges;
     if (products?.length >= 2) {
@@ -118,9 +119,9 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = (props) => {
   return (
     <div className="SubscriptionsCohort bg-browns-tan-light p-9">
       <div className="cohort-grid max-w-screen-lg mx-auto">
-        <div className="heading-group">
+        <div className="heading-group font-optima">
           <h2 className="mb-2 text-[32px]">Select Billing Term</h2>
-          <p className="mob:mb-5">
+          <p className="mob:mb-5 font-">
             Receive a different species each month. Pay monthly or save up to
             35% with a prepaid plan.
           </p>

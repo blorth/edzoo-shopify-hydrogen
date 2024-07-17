@@ -57,7 +57,7 @@ const BillingTermCard: React.FC<BillingTermCardProps> = ({
   return (
     <div className="BillingTermCard border-1 border-neutrals-gray-light py-4 pl-4 pr-5 w-full relative bg-white">
       {banner && (
-        <div className="banner uppercase text-white absolute text-[11px] py-1 px-3 bg-[#D4784C] right-[20px] top-[-12px]">
+        <div className="banner font-volkhov tracking-wide uppercase text-white absolute text-[11px] py-1 px-3 bg-[#D4784C] right-[20px] top-[-12px]">
           {banner}
         </div>
       )}

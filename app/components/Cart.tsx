@@ -1,6 +1,6 @@
 import {CartForm, Image, Money} from '@shopify/hydrogen';
 import type {CartLineUpdateInput} from '@shopify/hydrogen/storefront-api-types';
-import {Link} from '@remix-run/react';
+import {Link, json} from '@remix-run/react';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import {useVariantUrl} from '~/lib/variants';
 
@@ -10,6 +10,33 @@ type CartMainProps = {
   cart: CartApiQueryFragment | null;
   layout: 'page' | 'aside';
 };
+
+// export async function action({request, context}) {
+//   const {cart} = context;
+
+//   const formData = await request.formData();
+//   const {action, inputs} = CartForm.getFormInput(formData);
+
+//   let result;
+
+//   switch (action) {
+//     case CartForm.ACTIONS.LinesAdd:
+//       result = await cart.addLines(inputs.lines);
+//       break;
+//     case CartForm.ACTIONS.LinesUpdate:
+//       result = await cart.updateLines(inputs.lines);
+//       break;
+//     case CartForm.ACTIONS.LinesRemove:
+//       result = await cart.removeLines(inputs.lineIds);
+//       break;
+//     default:
+//       console.log('cart action is not defined::: ');
+//   }
+
+//   const headers = cart.setCartId(result.cart.id);
+
+//   return json(result, {status: 200, headers});
+// }
 
 export function CartMain({layout, cart}: CartMainProps) {
   const linesCount = Boolean(cart?.lines?.nodes?.length || 0);

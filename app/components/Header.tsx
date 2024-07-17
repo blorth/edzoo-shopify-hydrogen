@@ -1,5 +1,5 @@
 import {Button} from '@nextui-org/button';
-import {Await, NavLink, redirect, useNavigate} from '@remix-run/react';
+import {Await, Link, NavLink, redirect, useNavigate} from '@remix-run/react';
 import {Image} from '@shopify/hydrogen';
 import {useRootLoaderData} from '~/root';
 import {Suspense} from 'react';
@@ -223,9 +223,9 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
           primaryDomainUrl={header.shop.primaryDomain.url}
         />
         <div className="w-[133px] ml-auto gap-">
-          <a href="/">
+          <Link to="/">
             <Image src={logo} alt="Edzoocation" />
-          </a>
+          </Link>
         </div>
         <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
       </div>
