@@ -100,6 +100,7 @@ export async function action({request, context}: ActionFunctionArgs) {
 
 const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
   const {collections, cart} = useLoaderData<typeof loader>();
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [siblingSelections, setSiblingSelections] = useState<any>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>();
@@ -142,6 +143,11 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
     console.log('quantityAction::: ', quantityAction);
   };
 
+  const goToCheckout = async () => {
+    const cartData = await cart;
+    location.href = cartData.checkoutUrl;
+  };
+
   return (
     <div className="SubscriptionsCohortWithSelectedId bg-browns-tan-light p-9">
       <div className="cohort-grid max-w-6xl px-4 mx-auto">
@@ -164,6 +170,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
                 size="sm"
                 color="primary"
                 className="font-volkhov rounded-sm font-semibold tracking-wide uppercase"
+                onClick={goToCheckout}
               >
                 Confirm and Checkout
               </Button>
@@ -212,6 +219,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
             size="sm"
             color="primary"
             className="font-volkhov rounded-sm font-semibold tracking-wide uppercase"
+            onClick={goToCheckout}
           >
             Confirm and Checkout
           </Button>
