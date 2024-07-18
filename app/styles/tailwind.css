@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+  font-family: 'Optima';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/Optima.ttc');
+}
+
 @layer base {
   html {
     font-family: 'Optima', system-ui, sans-serif;
@@ -50,14 +59,6 @@
   h2 {
     font-size: 48px;
   }
-}
-
-@font-face {
-  font-family: 'Optima';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../assets/Optima.woff2') format('woff2');
 }
 
 @font-face {
