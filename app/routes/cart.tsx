@@ -11,15 +11,20 @@ export const meta: MetaFunction = () => {
 };
 
 export async function action({request, context}: ActionFunctionArgs) {
-  const {cart} = context;
+  const {session, cart} = context;
 
-  const formData = await request.formData();
+  // const formData = await request.formData();
 
-  const {action, inputs} = CartForm.getFormInput(formData);
+  // const {action, inputs} = CartForm.getFormInput(formData);
 
-  if (!action) {
-    throw new Error('No action provided');
-  }
+  const [formData, customerAccessToken] = await Promise.all([
+    request.formData(),
+    session.get('customerAccessToken'),
+  ]);
+
+  const {action : originAction, inputs} = CartForm.getFormInput(formData);
+  console.log(originAction);
+  const action = originAction ?? CartForm.ACTIONS.LinesAdd;
 
   let status = 200;
   let result: CartQueryDataReturn;
