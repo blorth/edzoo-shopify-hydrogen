@@ -11,6 +11,7 @@ import {
   useLoaderData,
   useMatches,
   useParams,
+  useSubmit,
   useSearchParams,
 } from '@remix-run/react';
 import {COLLECTION_FRAGMENT} from '~/lib/fragmentsSubscriptions';
@@ -99,7 +100,9 @@ export async function action({request, context}: ActionFunctionArgs) {
 }
 
 const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
+  const submit = useSubmit(); // Hook to manage form submission
   const {collections, cart} = useLoaderData<typeof loader>();
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [siblingSelections, setSiblingSelections] = useState<any>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>();
@@ -114,6 +117,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
         },
       );
       setSelectedProduct(matchingProduct.node);
+
       const products = [];
       for (const [key, value] of Object.entries(collections as any)) {
         const matched = value.products.edges.find((product: any) => {
@@ -131,6 +135,29 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
         if (matched) products.push(matched);
       }
       setSiblingSelections(products);
+      if (matchingProduct) {
+        const payload = {
+          action: "LinesAdd",
+          inputs: {
+            lines: [
+              {
+                merchandiseId: matchingProduct.node.id,
+                quantity: 1,
+              },
+            ],
+          },
+        };
+
+        // Convert payload to JSON string
+        const jsonPayload = JSON.stringify(payload);
+        
+        // Create a new form data object and append the JSON payload
+        const formData = new FormData();
+        formData.append('json', jsonPayload);
+
+        // Call submit to add the product to the cart with proper headers
+        submit(formData, { method: 'post', action: '/cart', headers: { 'Content-Type': 'application/json' } });
+      }
     }
   }, [collections]);
 
@@ -140,6 +167,11 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
   ) => {
     console.log('product::: ', product);
     console.log('quantityAction::: ', quantityAction);
+  };
+
+  const goToCheckout = async () => {
+    const cartData = await cart;
+    location.href = cartData.checkoutUrl;
   };
 
   return (
@@ -164,6 +196,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
                 size="sm"
                 color="primary"
                 className="font-volkhov rounded-sm font-semibold tracking-wide uppercase"
+                onClick={goToCheckout}
               >
                 Confirm and Checkout
               </Button>
@@ -212,6 +245,7 @@ const SubscriptionsCohert: React.FC<SubscriptionsCohertProps> = ({}) => {
             size="sm"
             color="primary"
             className="font-volkhov rounded-sm font-semibold tracking-wide uppercase"
+            onClick={goToCheckout}
           >
             Confirm and Checkout
           </Button>
