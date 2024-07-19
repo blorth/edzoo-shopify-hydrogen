@@ -49,7 +49,7 @@ export default {
       },
       fontFamily: {
         volkhov: ['Volkhov', 'serif'],
-        optima: ['Optima', 'sans-serif'],
+        optima: ['Optima', 'serif'],
       },
       gridTemplateColumns: {
         footer: '1fr 1fr minmax(100, 150px) 1fr',
